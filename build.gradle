@@ -42,6 +42,15 @@ dependencies {
 
 }
 
+jar {
+    manifest {
+        attributes(
+                "FMLCorePlugin": "me.ardimaster.pepak.coretweaker.PEpakCoreTweaker",
+                "FMLCorePluginContainsFMLMod": true
+        )
+    }
+}
+
 processResources
 {
     // this will ensure that this task is redone when the versions change.
