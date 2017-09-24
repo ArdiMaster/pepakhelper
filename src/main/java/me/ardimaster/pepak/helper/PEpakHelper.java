@@ -1,17 +1,17 @@
 package me.ardimaster.pepak.helper;
 
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import me.ardimaster.pepak.helper.proxy.CommonProxy;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = PEpakHelper.MODID, version = PEpakHelper.VERSION, name = PEpakHelper.NAME)
 public class PEpakHelper {
     public static final String MODID = "pepakhelper";
-    public static final String VERSION = "0.0.2";
+    public static final String VERSION = "0.0.3";
     public static final String NAME = "PEpakHelper";
 
     @Mod.Instance
