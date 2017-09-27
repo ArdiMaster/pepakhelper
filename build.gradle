@@ -17,7 +17,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "0.0.3"
+version = "feature-fixwailasr"
 group= "me.ardimaster.pepak" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "pepakhelper"
 
@@ -40,6 +40,15 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
+}
+
+jar {
+    manifest {
+        attributes(
+                "FMLCorePlugin": "me.ardimaster.pepak.coretweaker.PEpakCoreTweaker",
+                "FMLCorePluginContainsFMLMod": true
+        )
+    }
 }
 
 processResources
