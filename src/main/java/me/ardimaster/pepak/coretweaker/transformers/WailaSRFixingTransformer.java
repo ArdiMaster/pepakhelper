@@ -4,7 +4,8 @@ import cpw.mods.fml.relauncher.FMLRelaunchLog;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.apache.logging.log4j.Level;
 import org.objectweb.asm.*;
-import org.objectweb.asm.tree.*;
+import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.MethodNode;
 
 import java.util.Arrays;
 
@@ -76,13 +77,6 @@ public class WailaSRFixingTransformer implements IClassTransformer {
         mv.visitJumpInsn(Opcodes.GOTO, lCatchBlockEnd);
         mv.visitLabel(end);
         mv.visitLabel(handler);
-        mv.visitLdcInsn("PEpakCoreTweaker:SR");
-        mv.visitFieldInsn(Opcodes.GETSTATIC, "org/apache/logging/log4j/Level", "TRACE", "Lorg/apache/logging/log4j/Level;");
-        mv.visitLdcInsn("Fix triggered, caught NullPointerException in com/github/abrarsyed/secretroomsmod/common/OwnershipManager.isOwner(Ljava/util/UUID;Lcom/github/abrarsyed/secretroomsmod/common/BlockLocation;)Z");
-        mv.visitInsn(Opcodes.ICONST_0);
-        mv.visitTypeInsn(Opcodes.ANEWARRAY, "java/lang/Object");
-        mv.visitMethodInsn(Opcodes.INVOKESTATIC, "cpw/mods/fml/relauncher/FMLRelaunchLog",
-                "log", "(Ljava/lang/String;Lorg/apache/logging/log4j/Level;Ljava/lang/String;[Ljava/lang/Object;)V", false);
         mv.visitInsn(Opcodes.ICONST_0);
         mv.visitInsn(Opcodes.IRETURN);
         mv.visitLabel(lCatchBlockEnd);

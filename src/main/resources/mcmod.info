@@ -3,7 +3,7 @@
   "modid": "pepakhelper",
   "name": "PEpakHelper",
   "description": "Does little things to enhance PEpak experience.",
-  "version": "0.1.0-SNAPSHOT",
+  "version": "0.1.0",
   "mcversion": "1.7.10",
   "url": "",
   "updateUrl": "",
