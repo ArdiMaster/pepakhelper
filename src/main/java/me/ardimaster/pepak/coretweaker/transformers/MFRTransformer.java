@@ -124,9 +124,9 @@ public class MFRTransformer implements IClassTransformer {
                     addInsnList.add(new FrameNode(Opcodes.F_CHOP, 2, null, 0, null));
                     addInsnList.add(newStuffDoneLabel);
                     method.instructions.insertBefore(targetNode, addInsnList);
-                    log(Level.INFO, "   Transformed method func_14670_a(Lnet/minecraft/world/World;IIILnet/minecraft/entity/Entity;)V");
+                    log(Level.INFO, "   Transformed method " + method.name + method.desc);
                 } else {
-                    log(Level.WARN, "   Could not find target instruction in method func_149670_a, it will be loaded without modification");
+                    log(Level.WARN, "   Could not find target instruction in method " + method.name + method.desc + ", it will be loaded without modification");
                 }
             }
         }

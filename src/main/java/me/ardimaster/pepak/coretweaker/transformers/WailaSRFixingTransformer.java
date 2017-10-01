@@ -4,7 +4,8 @@ import cpw.mods.fml.relauncher.FMLRelaunchLog;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.apache.logging.log4j.Level;
 import org.objectweb.asm.*;
-import org.objectweb.asm.tree.*;
+import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.MethodNode;
 
 import java.util.Arrays;
 
@@ -32,6 +33,7 @@ public class WailaSRFixingTransformer implements IClassTransformer {
                 return classWriter.toByteArray();
             } catch (Exception e) {
                 log(Level.ERROR, "Unable to transform class " + transformedName + ", it will be loaded without modifications.");
+                e.printStackTrace();
                 return inputClass;
             }
         } else {
@@ -49,6 +51,8 @@ public class WailaSRFixingTransformer implements IClassTransformer {
 
         if (originalIsOwnerMethod != null) {
             classOwnershipManager.methods.remove(originalIsOwnerMethod);
+        } else {
+            log(Level.WARN, "   Method isOwner(Ljava/util/UUID;Lcom/github/abrarsyed/secretroomsmod/common/BlockLocation;)Z does not exist?! It will be created.");
         }
         MethodVisitor mv = classOwnershipManager.visitMethod(Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC,
                 "isOwner", "(Ljava/util/UUID;Lcom/github/abrarsyed/secretroomsmod/common/BlockLocation;)Z", null, null);
@@ -88,7 +92,7 @@ public class WailaSRFixingTransformer implements IClassTransformer {
         mv.visitLabel(lCatchBlockEnd);
         mv.visitMaxs(0,0);
         mv.visitEnd();
-        log(Level.INFO, "   Rewrote method isOwner in class getOwnershipManager");
+        log(Level.INFO, "   Rewrote method isOwner(Ljava/util/UUID;Lcom/github/abrarsyed/secretroomsmod/common/BlockLocation;)Z");
     }
 
     private void log(Level level, String message) {
