@@ -9,7 +9,10 @@ import java.util.Map;
 public class PEpakCoreTweaker implements IFMLLoadingPlugin {
     @Override
     public String[] getASMTransformerClass() {
-        return new String[]{"me.ardimaster.pepak.coretweaker.transformers.WailaSRFixingTransformer"};
+        return new String[]{
+                "me.ardimaster.pepak.coretweaker.transformers.WailaSRFixingTransformer",
+                "me.ardimaster.pepak.coretweaker.transformers.MFRTransformer"
+        };
     }
 
     @Override
