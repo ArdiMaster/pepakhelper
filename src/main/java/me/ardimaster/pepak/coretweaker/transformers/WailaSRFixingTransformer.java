@@ -19,8 +19,7 @@ public class WailaSRFixingTransformer implements IClassTransformer {
         int index = Arrays.asList(classesToTransform).indexOf(transformedName);
         if (index != -1) {
             try {
-                log(Level.INFO, "Transforming class " + transformedName);
-
+                log(Level.INFO, "PEpCT: Patching class " + transformedName);
                 ClassNode node = new ClassNode();
                 ClassReader classReader = new ClassReader(inputClass);
                 classReader.accept(node, 0);
@@ -30,9 +29,10 @@ public class WailaSRFixingTransformer implements IClassTransformer {
                 }
                 ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
                 node.accept(classWriter);
+                log(Level.INFO, "PEpCT: Done patching class " + transformedName);
                 return classWriter.toByteArray();
             } catch (Exception e) {
-                log(Level.ERROR, "Unable to transform class " + transformedName + ", it will be loaded without modifications.");
+                log(Level.WARN, "Potential problem: PEpakCoreTweaker was unable to patch " + transformedName);
                 e.printStackTrace();
                 return inputClass;
             }
@@ -50,6 +50,7 @@ public class WailaSRFixingTransformer implements IClassTransformer {
         }
 
         if (originalIsOwnerMethod != null) {
+            log(Level.INFO, "   Replacing method isOwner");
             classOwnershipManager.methods.remove(originalIsOwnerMethod);
         } else {
             log(Level.WARN, "   Method isOwner(Ljava/util/UUID;Lcom/github/abrarsyed/secretroomsmod/common/BlockLocation;)Z does not exist?! It will be created.");
@@ -85,7 +86,7 @@ public class WailaSRFixingTransformer implements IClassTransformer {
         mv.visitLabel(lCatchBlockEnd);
         mv.visitMaxs(0,0);
         mv.visitEnd();
-        log(Level.INFO, "   Rewrote method isOwner(Ljava/util/UUID;Lcom/github/abrarsyed/secretroomsmod/common/BlockLocation;)Z");
+        log(Level.DEBUG, "   Successfully rewrote isOwner(Ljava/util/UUID;Lcom/github/abrarsyed/secretroomsmod/common/BlockLocation;)Z");
     }
 
     private void log(Level level, String message) {
