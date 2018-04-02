@@ -38,7 +38,7 @@ public class MFRTransformer implements IClassTransformer {
         int index = Arrays.asList(classesToTransform).indexOf(transformedName);
         if (index != -1) {
             try {
-                log(Level.DEBUG, "PEpCT: Patching class " + transformedName);
+                log(Level.INFO, "PEpCT: Patching class " + transformedName);
 
                 ClassNode node = new ClassNode();
                 ClassReader classReader = new ClassReader(inputClass);
